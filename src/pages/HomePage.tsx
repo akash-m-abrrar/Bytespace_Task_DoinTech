@@ -1,8 +1,10 @@
+import { Navbar } from '@/components/layout/Navbar'
+import { HeroSection } from '@/components/sections/HeroSection'
+
 export function HomePage() {
   return (
     <main>
-      <h1>ByteSpace New</h1>
-      <p>Frontend foundation is ready.</p>
+      <HeroSection navbar={<Navbar />} />
     </main>
   )
 }
