@@ -6,7 +6,8 @@ import { LearningPathsSection } from '@/features/learning-paths/components/Learn
 import { ProfessionalGrowthSection } from '@/features/professional-growth/components/ProfessionalGrowthSection'
 import { CourseManagementSection } from '@/features/course-management/components/CourseManagementSection'
 import { CreatorCtaSection } from '@/features/creator-cta/components/CreatorCtaSection'
-
+import { TestimonialsSection } from '@/features/testimonials/components/TestimonialsSection'
+import { Footer } from '@/components/sections/Footer'
 
 export function HomePage() {
   return (
@@ -17,7 +18,9 @@ export function HomePage() {
       <LearningPathsSection />
       <ProfessionalGrowthSection />
       <CourseManagementSection />
+      <TestimonialsSection />
       <CreatorCtaSection />
+      <Footer />
     </main>
   )
 }
