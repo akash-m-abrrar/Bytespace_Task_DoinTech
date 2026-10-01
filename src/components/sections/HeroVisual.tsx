@@ -4,36 +4,14 @@ export interface HeroVisualProps {
   className?: string
 }
 
-/**
- * HeroVisual — the lower visual composition of the Hero.
- *
- * This component receives its height from the parent via flex-1.
- * All children are absolutely positioned within this relative container.
- *
- * Layer order:
- *   z-[2]  small lime spring accent (near Progress card)
- *   z-10   lime arch (Ellipse 7) — bottom-anchored
- *   z-20   student image — bottom-anchored, centered
- *   z-30   three floating info cards
- *
- * Positioning strategy:
- *   • Arch & student:  bottom-0, left-1/2 -translate-x-1/2
- *   • Cards:           left/right % + bottom % relative to this container
- *     (percentages chosen so cards align with student's upper/lower body
- *      across every breakpoint)
- */
 export function HeroVisual({ className }: HeroVisualProps) {
   return (
-    /*
-     * w-full inherits parent width; height comes from flex-1 in the parent.
-     * overflow-visible lets the lime spring accent peek into surrounding area.
-     */
     <div className={cn('relative w-full overflow-visible', className)}>
-
-      {/* ── Small lime spring near "Learning Progress" card ─────── */}
+      {/* Decorative lime spring */}
       <img
         src="/Doin_Assets_png/green_spring-1.png"
-        alt="" aria-hidden="true"
+        alt=""
+        aria-hidden="true"
         className="
           absolute z-[2] pointer-events-none select-none drop-shadow-lg
           top-[4%]
@@ -42,10 +20,11 @@ export function HeroVisual({ className }: HeroVisualProps) {
         "
       />
 
-      {/* ── 1. LIME ARCH — bottom anchored, centred ─────────────── */}
+      {/* Lime arch background */}
       <img
         src="/Doin_Assets_png/Ellipse 7.png"
-        alt="" aria-hidden="true"
+        alt=""
+        aria-hidden="true"
         className="
           absolute z-10 pointer-events-none select-none
           bottom-0 left-1/2 -translate-x-1/2
@@ -54,7 +33,7 @@ export function HeroVisual({ className }: HeroVisualProps) {
         "
       />
 
-      {/* ── 2. STUDENT IMAGE — bottom anchored, centred ──────────── */}
+      {/* Student image */}
       <img
         src="/Doin_Assets_png/Image.png"
         alt="Student learning online with headphones and laptop"
@@ -66,32 +45,7 @@ export function HeroVisual({ className }: HeroVisualProps) {
         "
       />
 
-      {/*
-        ── 3. FLOATING CARDS
-
-        Vertical anchor (bottom %) calibration:
-          The student image aspect ratio is 722 × 515 ≈ 1.40 : 1.
-
-          At each breakpoint, student height ≈ width / 1.40:
-            sm  250 / 1.40 = 178 px
-            md  320 / 1.40 = 229 px
-            lg  390 / 1.40 = 279 px
-
-          Container height (flex-1 receives whatever remains after title +
-          search ≈ 280–380 px depending on viewport).
-
-          We want UI/UX and Progress cards to sit at roughly the student's
-          shoulder area (≈ top 30% of student = 70% from bottom of student):
-            lg: 279 × 0.70 = 195 px → as % of ~380 px container ≈ 51%
-
-          Happy Students card sits at student's lower-chest / waist
-          (≈ top 60% of student = 40% from student bottom):
-            lg: 279 × 0.40 = 112 px → ≈ 29% of container
-
-          These are coarse percentages refined by breakpoint.
-      */}
-
-      {/* Card A: UI/UX Design (upper-left of student) */}
+      {/* Floating information cards */}
       <div
         className="
           absolute z-30
@@ -109,7 +63,6 @@ export function HeroVisual({ className }: HeroVisualProps) {
         </p>
       </div>
 
-      {/* Card B: Learning Progress 55% (upper-right of student) */}
       <div
         className="
           absolute z-30
@@ -134,7 +87,6 @@ export function HeroVisual({ className }: HeroVisualProps) {
         </div>
       </div>
 
-      {/* Card C: Happy Students (lower-left of student) */}
       <div
         className="
           absolute z-30
@@ -150,7 +102,6 @@ export function HeroVisual({ className }: HeroVisualProps) {
           className="w-[128px] sm:w-[145px] md:w-[162px] lg:w-[178px] h-auto object-contain"
         />
       </div>
-
     </div>
   )
 }
