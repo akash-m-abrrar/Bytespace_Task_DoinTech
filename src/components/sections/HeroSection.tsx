@@ -11,62 +11,37 @@ export interface HeroSectionProps {
   className?: string
 }
 
-/**
- * HeroSection
- *
- * Layout model (lg desktop, 1440 × 900):
- *
- *   section  (position:relative, height:100vh, overflow:hidden)
- *   ├── GridBackground          (z-0, absolute inset)
- *   ├── Decorative 3-D shapes   (z-[2]–z-[5], absolute within section)
- *   ├── Navbar                  (fixed z-50 — not in flow)
- *   └── .content-col            (z-10, flex-col, fills 100% of section)
- *       ├── SectionHeader       (natural height)
- *       ├── SearchBar           (natural height)
- *       └── HeroVisual          (flex-1 — fills every remaining pixel)
- *
- * The section uses h-[100svh] (exact viewport) so flex-1 distributes
- * height deterministically.  overflow-hidden clips decorations at edges.
- */
 export function HeroSection({ navbar, className }: HeroSectionProps) {
   return (
     <section
       className={cn(
-        /* h-screen = exact 100vh so flex-1 distributes height reliably */
-        /* overflow-hidden = decorative PNGs never create scroll bars   */
         'relative h-screen min-h-[640px] bg-[#003be2] overflow-hidden flex flex-col',
         className
       )}
     >
-      {/* ── z-0: Dot-grid background ─────────────────────────────── */}
+      {/* Grid background */}
       <GridBackground />
 
-      {/*
-        ── z-[2..5]: Decorative 3-D shapes
-        Absolute within the SECTION so they can span the full hero height.
-        Each shape uses section-relative percentages (top / bottom as %
-        of section height) so they scale proportionally at every viewport.
-      */}
-
-      {/* LEFT – Large lime coil spring */}
+      {/* Decorative 3D elements */}
       <img
         src="/Doin_Assets_png/green_spring-1.png"
-        alt="" aria-hidden="true"
+        alt=""
+        aria-hidden="true"
         className="
-          absolute z-[2] pointer-events-none select-none
+          absolute z-2 pointer-events-none select-none
           -left-10 top-[28%]
           sm:-left-4  sm:top-[30%]
           md:-left-2  md:top-[30%]
           lg:left-0   lg:top-[28%]
-          w-[110px] sm:w-[155px] md:w-[195px] lg:w-[235px]
+          w-[110px] sm:w-38.75 md:w-[195px] lg:w-[235px]
           drop-shadow-2xl
         "
       />
 
-      {/* LEFT – Smaller white coil spring (mid-left) */}
       <img
         src="/Doin_Assets_png/white-spring-2.png"
-        alt="" aria-hidden="true"
+        alt=""
+        aria-hidden="true"
         className="
           absolute z-[2] pointer-events-none select-none
           left-[3%] top-[60%]
@@ -78,10 +53,10 @@ export function HeroSection({ navbar, className }: HeroSectionProps) {
         "
       />
 
-      {/* LEFT – Large white torus ring (bottom-left) */}
       <img
         src="/Doin_Assets_png/white_circle-1.png"
-        alt="" aria-hidden="true"
+        alt=""
+        aria-hidden="true"
         className="
           absolute z-[5] pointer-events-none select-none
           -left-10  bottom-[4%]
@@ -93,10 +68,10 @@ export function HeroSection({ navbar, className }: HeroSectionProps) {
         "
       />
 
-      {/* RIGHT – Lime bucket / wedge accent (top-right) */}
       <img
         src="/Doin_Assets_png/white-mask-2.png"
-        alt="" aria-hidden="true"
+        alt=""
+        aria-hidden="true"
         className="
           absolute z-[2] pointer-events-none select-none
           -right-6  top-[14%]
@@ -108,10 +83,10 @@ export function HeroSection({ navbar, className }: HeroSectionProps) {
         "
       />
 
-      {/* RIGHT – White tetrahedron triangle (mid-right) */}
       <img
         src="/Doin_Assets_png/white_triangle-1.png"
-        alt="" aria-hidden="true"
+        alt=""
+        aria-hidden="true"
         className="
           hidden sm:block
           absolute z-[2] pointer-events-none select-none
@@ -123,10 +98,10 @@ export function HeroSection({ navbar, className }: HeroSectionProps) {
         "
       />
 
-      {/* RIGHT – White coil spring (lower-right) */}
       <img
         src="/Doin_Assets_png/white-spring-2.png"
-        alt="" aria-hidden="true"
+        alt=""
+        aria-hidden="true"
         className="
           absolute z-[5] pointer-events-none select-none
           right-[1%] bottom-[4%]
@@ -138,15 +113,10 @@ export function HeroSection({ navbar, className }: HeroSectionProps) {
         "
       />
 
-      {/* ── Navbar (fixed z-50, outside normal flow) ─────────────── */}
+      {/* Navigation */}
       {navbar ?? <Navbar />}
 
-      {/*
-        ── z-10: Main content column
-        pt-* clears the fixed Navbar.
-        flex-1 fills the full section height (100svh).
-        flex-col + items-center stacks & centres children.
-      */}
+      {/* Main content */}
       <div
         className="
           relative z-10
@@ -157,7 +127,6 @@ export function HeroSection({ navbar, className }: HeroSectionProps) {
           max-w-7xl mx-auto w-full
         "
       >
-        {/* ── Title + description ───────────────────────────────── */}
         <SectionHeader
           title={
             <>
@@ -170,14 +139,8 @@ export function HeroSection({ navbar, className }: HeroSectionProps) {
           className="mb-6 sm:mb-7 md:mb-8"
         />
 
-        {/* ── Search bar ───────────────────────────────────────── */}
         <SearchBar className="mb-4 sm:mb-5 md:mb-6" />
 
-        {/*
-          ── Visual composition (flex-1 → fills every remaining pixel)
-          The exact height is determined by what's left after title + search.
-          HeroVisual uses this height as its positioning context.
-        */}
         <HeroVisual className="flex-1 w-full" />
       </div>
     </section>
