@@ -5,6 +5,8 @@ import { CourseDiscoverySection } from '@/features/course-discovery/components/C
 import { LearningPathsSection } from '@/features/learning-paths/components/LearningPathsSection'
 import { ProfessionalGrowthSection } from '@/features/professional-growth/components/ProfessionalGrowthSection'
 import { CourseManagementSection } from '@/features/course-management/components/CourseManagementSection'
+import { CreatorCtaSection } from '@/features/creator-cta/components/CreatorCtaSection'
+
 
 export function HomePage() {
   return (
@@ -15,6 +17,7 @@ export function HomePage() {
       <LearningPathsSection />
       <ProfessionalGrowthSection />
       <CourseManagementSection />
+      <CreatorCtaSection />
     </main>
   )
 }
